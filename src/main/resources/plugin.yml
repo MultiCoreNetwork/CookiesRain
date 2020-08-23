@@ -1,0 +1,10 @@
+name: ${project.name}
+main: it.multicoredev.cookiesrain.CookiesRain
+version: ${project.version}
+authors: [DanTTV, LoreSchaeffer]
+softdepend: [MCCore]
+
+commands:
+  cookiesrain:
+    aliases: [cr]
+    description: CookiesRain!

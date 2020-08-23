@@ -1,0 +1,45 @@
+#Game duration (in seconds)
+game-duration: 3600
+#Chance for a cookie to spawn
+cookie-spawn-chance: 50
+#World in which cookies will spawn during rain
+rain-world: "world"
+#Cookies will spawn inside this radius from the players
+spawn-distance: 36
+#Cookies will spawn x block above the player y
+height-offset: 50
+#Lifespan of a cookie (in seconds)
+cookie-lifespan: 5
+#Points per cookie caught
+cookie-points: 5
+
+#Since 1.16 you can use all colors simply writing in the messages it's hexadecimal color code after # (like this #ab01cd)
+messages:
+  start-title: "&6Cookies Rain"
+  start-subtitle: "&estarts now!"
+  start-messages:
+    - "&eFind and catch the &6Cookies &ethat rain from the sky!"
+    - "&eMore &6Cookies &eyou catch more points you earn."
+    - "&eThe game ends in 1 hour!"
+    - "&6&lGood Game and have fun!"
+  end-title: "&6Cookies Rain"
+  end-subtitle: "&eended!"
+  #Use {leaderboard}(X) to send the first X players in the leaderboard
+  end-messages:
+    - "&5This is the leaderboard with the top 5 players!"
+    - "{leaderboard}(5)"
+    - "&eThanks for playing!"
+  resume-title: ""
+  resume-subtitle: ""
+  resume-messages: []
+  leaderboard: "&6&l{position}. &e{player} - &b{points} &epoints"
+  cookie-caught: "&6You caught a cookie! Earned &e{earned_points} &6points. Now you have &e{total_points}&6 points."
+  insufficient-perms: "&4Insufficient permissions!"
+  incorrect-usage: "&4Incorrect usage!"
+  leaderboard-disabled: "&cLeaderboard is not visible during the event!"
+  leaderboard-empty: "&6Leaderboard empty!"
+  stop-before-reload: "&cYou can't reload the plugin now! Stop the game before reloading."
+  plugin-reloaded: "&6CookiesRain reloaded!"
+  game-running: "&cThe game is already running!"
+  game-not-running: "&cThe game is not running!"
+  game-stopped: "&cCookies Rain has been stopped!"
