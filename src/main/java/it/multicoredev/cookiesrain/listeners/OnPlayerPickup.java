@@ -54,7 +54,6 @@ public class OnPlayerPickup implements Listener {
         Cookie cookie = getCookie(item);
 
         if (cookie == null) return;
-
         event.setCancelled(true);
 
         game.getCookies().remove(cookie);
@@ -71,7 +70,6 @@ public class OnPlayerPickup implements Listener {
         Chat.send(config.getString("messages.cookie-caught")
                 .replace("{earned_points}", String.valueOf(config.getInt("cookie-points"))
                         .replace("{total_points}", String.valueOf(user.getPoints()))), player);
-        Chat.send("&6Ora hai &e" + user.getPoints() + " punti&6", player);
     }
 
     private Cookie getCookie(Item item) {

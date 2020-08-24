@@ -6,6 +6,8 @@ import it.multicoredev.cookiesrain.storage.LeaderboardManager;
 import it.multicoredev.cookiesrain.storage.User;
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.yaml.Configuration;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -189,9 +191,11 @@ public class Game {
                 stopGame(false);
             }
 
-            //For actionbar timer
-            /*long missingTime = config.getInt("game-duration") - getLeaderboard().getTimer();
-            String time = getMissingTime(missingTime);*/
+            long missingTime = config.getInt("game-duration") - getLeaderboard().getTimer();
+            String time = getMissingTime(missingTime);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Chat.getTranslated("&6" + time)));
+            }
         }
 
         private boolean isInWater(Cookie cookie) {
