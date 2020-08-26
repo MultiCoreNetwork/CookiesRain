@@ -42,6 +42,18 @@
         </developer>
     </developers>
 
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -50,21 +62,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>it.multicoredev</groupId>
+            <groupId>it.multicoredev.mbcore.spigot</groupId>
             <artifactId>MBCore-spigot</artifactId>
-            <version>6.0.0</version>
+            <version>6.0.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -84,20 +84,7 @@
             <artifactId>item-nbt-api-plugin</artifactId>
             <version>2.4.1</version>
         </dependency>
-
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>codemc-repo</id>
-            <url>https://repo.codemc.org/repository/maven-public/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
