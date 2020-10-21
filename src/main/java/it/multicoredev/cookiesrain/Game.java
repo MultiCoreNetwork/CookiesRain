@@ -1,6 +1,5 @@
 package it.multicoredev.cookiesrain;
 
-import de.tr7zw.nbtapi.NBTItem;
 import it.multicoredev.cookiesrain.storage.Leaderboard;
 import it.multicoredev.cookiesrain.storage.LeaderboardManager;
 import it.multicoredev.cookiesrain.storage.User;
@@ -8,9 +7,11 @@ import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.yaml.Configuration;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.minecraft.server.v1_16_R2.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -73,9 +74,15 @@ public class Game {
     public void stopGame(boolean force) {
         running = false;
 
-        if (!rainTask.isCancelled()) rainTask.cancel();
-        if (!despawnTask.isCancelled()) despawnTask.cancel();
-        if (!endTask.isCancelled()) endTask.cancel();
+        if (rainTask != null) {
+            if (!rainTask.isCancelled()) rainTask.cancel();
+        }
+        if (despawnTask != null) {
+            if (!despawnTask.isCancelled()) despawnTask.cancel();
+        }
+        if (endTask != null) {
+            if (!endTask.isCancelled()) endTask.cancel();
+        }
         rainTask = null;
         despawnTask = null;
         endTask = null;
@@ -138,9 +145,13 @@ public class Game {
             Location cookieLoc = new Location(playerLoc.getWorld(), x, y, z);
 
             ItemStack cookie = new ItemStack(Material.COOKIE, 1);
-            NBTItem nbt = new NBTItem(cookie);
+
+            net.minecraft.server.v1_16_R2.ItemStack nmsCookie = CraftItemStack.asNMSCopy(cookie);
+            NBTTagCompound nbt = nmsCookie.getTag();
+            if (nbt == null) nbt = new NBTTagCompound();
             nbt.setBoolean("cookie", true);
-            cookie = nbt.getItem();
+            nmsCookie.setTag(nbt);
+            cookie = CraftItemStack.asBukkitCopy(nmsCookie);
 
             ItemStack finalCookie = cookie;
             Bukkit.getScheduler().callSyncMethod(plugin, () -> {

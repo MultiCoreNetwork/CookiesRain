@@ -97,7 +97,7 @@ public class CookiesRainExecutor implements CommandExecutor {
 
             game.sendTitle(config.getString("messages.start-title"), config.getString("messages.start-subtitle"));
 
-            for (String line : config.getStringList("messages.end-messages")) {
+            for (String line : config.getStringList("messages.start-messages")) {
                 Chat.broadcast(line);
             }
 

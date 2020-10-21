@@ -1,17 +1,19 @@
 package it.multicoredev.cookiesrain.listeners;
 
-import de.tr7zw.nbtapi.NBTItem;
 import it.multicoredev.cookiesrain.Cookie;
 import it.multicoredev.cookiesrain.Game;
 import it.multicoredev.cookiesrain.storage.User;
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.yaml.Configuration;
+import net.minecraft.server.v1_16_R2.NBTTagCompound;
+import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Copyright © 2020 by Daniele Patella & Lorenzo Magni
@@ -48,7 +50,11 @@ public class OnPlayerPickup implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
 
         Item item = event.getItem();
-        NBTItem nbt = new NBTItem(item.getItemStack());
+        ItemStack itemStack = item.getItemStack();
+
+        net.minecraft.server.v1_16_R2.ItemStack nmsCookie = CraftItemStack.asNMSCopy(itemStack);
+        NBTTagCompound nbt = nmsCookie.getTag();
+        if (nbt == null) nbt = new NBTTagCompound();
         if (!nbt.hasKey("cookie")) return;
 
         Cookie cookie = getCookie(item);
@@ -67,9 +73,10 @@ public class OnPlayerPickup implements Listener {
         game.getLeaderboard().setUser(user);
         game.saveLeaderboard();
 
-        Chat.send(config.getString("messages.cookie-caught")
-                .replace("{earned_points}", String.valueOf(config.getInt("cookie-points"))
-                        .replace("{total_points}", String.valueOf(user.getPoints()))), player);
+        String msg = config.getString("messages.cookie-caught")
+                .replace("{earned_points}", String.valueOf(config.getInt("cookie-points")))
+                .replace("{total_points}", String.valueOf(user.getPoints()));
+        Chat.send(msg, player);
     }
 
     private Cookie getCookie(Item item) {
